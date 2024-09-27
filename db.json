@@ -1,29 +1,19 @@
 {
   "posts": [
     {
-      "id": "1",
-      "title": "hello",
-      "body": "body test"
-    },
-    {
-      "id": "2",
-      "title": "hello2",
-      "body": "body test2"
-    },
-    {
-      "id": "3",
-      "title": "testtest",
-      "body": "body test3"
-    },
-    {
-      "id": "8960",
+      "id": 1,
       "title": "test",
       "body": "qeqwxxczaffa"
     },
     {
-      "id": "f22b",
+      "id": 2,
       "title": "sfssvvs",
       "body": "sdfsdfawqeqwe"
+    },
+    {
+      "id": 3,
+      "title": "test2",
+      "body": "testestsetsetst"
     }
   ]
 }
