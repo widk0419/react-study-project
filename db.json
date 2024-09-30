@@ -1,19 +1,16 @@
 {
   "posts": [
     {
-      "id": "0aec",
-      "title": "new",
-      "body": "123124124124"
+      "id": "deb3",
+      "title": "react study",
+      "body": "createdAt 추가",
+      "createdAt": 1727679129511
     },
     {
-      "id": "0c8c",
-      "title": "test",
-      "body": "rwrwfsaafs"
-    },
-    {
-      "id": "b24d",
-      "title": "widk",
-      "body": "widkwidk"
+      "id": "bf48",
+      "title": "react study2",
+      "body": "createdAt 추가 \nedit 기능 테스트 \n게시글 업데이트 확인",
+      "createdAt": 1727685026801
     }
   ]
 }

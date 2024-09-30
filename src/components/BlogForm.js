@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"; 
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"; 
+import { bool } from "prop-types";
 
-const BlogForm = () => {
+const BlogForm = ( {editing} ) => {
   const history = useHistory();
+  const {id} = useParams();
 
     const [title, setTitle ] = useState('');
     const [body, setBody ] = useState('');
+
+    useEffect(() => {
+      axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
+        setTitle(res.data.title);
+        setBody(res.data.body);
+      });
+    }, [id])
+
     const onsubmit = () => {
       axios.post('http://localhost:3001/posts', {
         title,
-        body
+        body,
+        createdAt: Date.now()
       }).then(() => {
         history.push('/blogs');
       });
@@ -18,7 +29,7 @@ const BlogForm = () => {
     
     return (
         <div>
-          <h1>Create a Blog post</h1>
+          <h1>{editing ? 'Edit' : 'Create'} a Blog post</h1>
           <div className="mb-3">
             <label className="form-label">Title</label>
             <input 
@@ -44,9 +55,17 @@ const BlogForm = () => {
             className="btn btn-primary"
             onClick={onsubmit}
           >
-            Post</button>
+            {editing ? 'Edit' : 'Post'}</button>
         </div>
     )
 };
+
+BlogForm.propTypes = {
+  editing: bool
+}
+
+BlogForm.defaultProps = {
+  editing: false
+}
 
 export default BlogForm;
