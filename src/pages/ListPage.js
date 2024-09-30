@@ -51,8 +51,8 @@ const ListPage = () => {
                     <div>
                         <button 
                             className="btn btn-danger btn-sm"
-                            onClick={deleteBlog}
-                        >
+                            onClick={(e) => deleteBlog(e, post.id)}  // id 값을 넘겨줌
+                            >
                             Delete
                         </button>
                     </div>
