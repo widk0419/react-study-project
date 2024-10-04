@@ -6,25 +6,53 @@ import { bool } from "prop-types";
 const BlogForm = ( {editing} ) => {
   const history = useHistory();
   const {id} = useParams();
-
     const [title, setTitle ] = useState('');
+    const [originalTitle, setOriginalTitle] = useState('');
     const [body, setBody ] = useState('');
+    const [originalBody, setOriginalBody] = useState('');
+
 
     useEffect(() => {
-      axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
-        setTitle(res.data.title);
-        setBody(res.data.body);
-      });
-    }, [id])
+      if(editing){
+        axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
+          setTitle(res.data.title);
+          setOriginalTitle(res.data.title);
+          setBody(res.data.body);
+          setOriginalBody(res.data.body);
+        });
+      }
+      
+    }, [id, editing]);
+
+    const isEdited = () => {
+      return title !== originalTitle || body !== originalBody
+    };
+
+    const goBack = () => {
+      if(editing) {
+        history.push(`/blogs/${id}`);
+      } else {
+        history.push('/blogs/');
+      }
+    }
 
     const onsubmit = () => {
-      axios.post('http://localhost:3001/posts', {
+      if(editing) {
+        axios.patch(`http://localhost:3001/posts/${id}`, {
+          title,
+          body
+        }).then((res) => {
+          history.push(`/blogs/${id}`);
+        })
+      } else {
+        axios.post('http://localhost:3001/posts', {
         title,
         body,
         createdAt: Date.now()
-      }).then(() => {
-        history.push('/blogs');
-      });
+        }).then(() => {
+          history.push('/blogs');
+        });
+      }
     };
     
     return (
@@ -54,8 +82,16 @@ const BlogForm = ( {editing} ) => {
           <button 
             className="btn btn-primary"
             onClick={onsubmit}
+            disabled={editing && !isEdited()}
           >
-            {editing ? 'Edit' : 'Post'}</button>
+            {editing ? 'Edit' : 'Post'}
+          </button>
+          <button 
+            className="btn btn-danger ms-2"
+            onClick={goBack}
+          >
+            Cancel
+          </button>
         </div>
     )
 };

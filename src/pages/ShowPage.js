@@ -38,7 +38,7 @@ const ShowPage = () => {
                     </Link>
                 </div>
             </div>
-                <small class="text-muted">
+                <small className="text-muted">
                     Created At: {printDate(post.createdAt)}
                 </small>
                 <hr />
