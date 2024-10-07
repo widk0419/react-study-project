@@ -4,13 +4,22 @@
       "id": "deb3",
       "title": "react study",
       "body": "createdAt 추가",
-      "createdAt": 1727679129511
+      "createdAt": 1727679129511,
+      "publish": true
     },
     {
       "id": "bf48",
       "title": "react study2",
       "body": "createdAt 추가 \nedit 기능 테스트 \n게시글 업데이트 확인",
-      "createdAt": 1727685026801
+      "createdAt": 1727685026801,
+      "publish": false
+    },
+    {
+      "id": "f82d",
+      "title": "redux",
+      "body": "redux study",
+      "publish": true,
+      "createdAt": 1728264829328
     }
   ]
 }
