@@ -20,6 +20,20 @@
       "body": "redux study",
       "publish": true,
       "createdAt": 1728264829328
+    },
+    {
+      "id": "43da",
+      "title": "publish test",
+      "body": "publish true인 게시글",
+      "publish": true,
+      "createdAt": 1728265095342
+    },
+    {
+      "id": "177a",
+      "title": "Publish test ",
+      "body": "publish false인 게시글",
+      "publish": false,
+      "createdAt": 1728265110729
     }
   ]
 }

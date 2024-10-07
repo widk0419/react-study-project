@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Card = ({ title, onClick, children }) => {
+const Card = ({ title, 
+    onClick = () => {}, 
+    children = null }) => {
     return (
         <div className="card mb-3 cursor-pointer" onClick={onClick}>
             <div className="card-body">
@@ -19,10 +21,10 @@ Card.propTypes = {
     onClick: PropTypes.func,
 };
 
-Card.defaultProps = {
-    children: null,
-    onClick: () => {}
-};
+// Card.defaultProps = {
+//     children: null,
+//     onClick: () => {}
+// };
 
 
 export default Card;
