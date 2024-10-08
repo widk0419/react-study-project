@@ -34,6 +34,13 @@
       "body": "publish false인 게시글",
       "publish": false,
       "createdAt": 1728265110729
+    },
+    {
+      "id": "d2ad",
+      "title": "go admin test",
+      "body": "gogogogo",
+      "publish": false,
+      "createdAt": 1728282260966
     }
   ]
 }

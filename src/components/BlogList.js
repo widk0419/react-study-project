@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { bool } from "prop-types";
+import PagiNation from "./Pagination";
 
 const BlogList = ({isAdmin = false}) => {
 
@@ -11,9 +12,9 @@ const BlogList = ({isAdmin = false}) => {
     const [posts, setPosts] = useState([]) ;
     const [loading, setLoading] = useState(true);
 
-    const getPosts = () => {
-        axios.get('http://localhost:3001/posts').then((res) => {
-            setPosts(res.data);
+    const getPosts = (page = 1) => {
+        axios.get(`http://localhost:3001/posts?_page=${page}&limit=6&_sort=id&_order=desc`).then((res) => {
+            setPosts(res.data.data);
             setLoading(false);
         })
     }
@@ -42,27 +43,36 @@ const BlogList = ({isAdmin = false}) => {
         );
     };
 
-    return posts.filter(post => {
-        return isAdmin || post.publish
-    }).map( post => {
-        return (
-            <Card 
-                key = {post.id} 
-                title = {post.title} 
-                onClick={() => { history.push(`/blogs/${post.id}`)}} 
-            >
-                { isAdmin ? (
-                <div>
-                    <button 
-                        className="btn btn-danger btn-sm"
-                        onClick={(e) => deleteBlog(e, post.id)}  // id 값을 넘겨줌
-                        >
-                        Delete
-                    </button>
-                </div> ) : null}
-            </Card>
-        ) 
-    }) 
+    const renderBlogList = () => {
+        return posts.filter(post => {
+            return isAdmin || post.publish
+        }).map( post => {
+            return (
+                <Card 
+                    key = {post.id} 
+                    title = {post.title} 
+                    onClick={() => { history.push(`/blogs/${post.id}`)}} 
+                >
+                    { isAdmin ? (
+                    <div>
+                        <button 
+                            className="btn btn-danger btn-sm"
+                            onClick={(e) => deleteBlog(e, post.id)}  // id 값을 넘겨줌
+                            >
+                            Delete
+                        </button>
+                    </div> ) : null}
+                </Card>
+            ) 
+        }); 
+    }
+
+    return (
+        <div>
+            {renderBlogList()}
+            <PagiNation />
+        </div>
+    )
 };
 
 BlogList.propTypes = {
