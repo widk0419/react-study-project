@@ -11,10 +11,34 @@ const BlogList = ({isAdmin = false}) => {
     const history = useHistory();
     const [posts, setPosts] = useState([]) ;
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfPosts, setNumberOfPosts] = useState(0);
+    const [numberOfPages, setNumberOfPages] = useState(0);
+    const limit = 5;
+
+    useEffect(() => {
+        setNumberOfPages(Math.ceil(numberOfPosts/limit));
+    }, [numberOfPosts]);
 
     const getPosts = (page = 1) => {
-        axios.get(`http://localhost:3001/posts?_page=${page}&limit=6&_sort=id&_order=desc`).then((res) => {
-            setPosts(res.data.data);
+        setCurrentPage(page);
+        let params = {
+            _page: page,
+            _limit: limit,
+            _sort: 'id',
+            _order: 'desc'
+        }
+
+        if ( !isAdmin ) {
+            params = { ...params, publish: true};
+        }
+
+        axios.get(`http://localhost:3001/posts`,{ 
+            params: params
+        }).then((res) => {
+            console.log(res.data.length);
+            setNumberOfPosts(res.headers['x-total-count']);
+            setPosts(res.data);
             setLoading(false);
         })
     }
@@ -70,7 +94,12 @@ const BlogList = ({isAdmin = false}) => {
     return (
         <div>
             {renderBlogList()}
-            <PagiNation />
+            <PagiNation 
+                currentPage={currentPage} 
+                numberOfPages={numberOfPages}
+                onClick={getPosts}
+                limit
+            />
         </div>
     )
 };

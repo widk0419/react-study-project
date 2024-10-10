@@ -1,46 +1,60 @@
 {
   "posts": [
     {
-      "id": "deb3",
-      "title": "react study",
-      "body": "createdAt 추가",
-      "createdAt": 1727679129511,
-      "publish": true
-    },
-    {
-      "id": "bf48",
-      "title": "react study2",
-      "body": "createdAt 추가 \nedit 기능 테스트 \n게시글 업데이트 확인",
-      "createdAt": 1727685026801,
-      "publish": false
-    },
-    {
-      "id": "f82d",
-      "title": "redux",
-      "body": "redux study",
+      "title": "new post test",
+      "body": "111234141dsfasfsvawsrwr",
       "publish": true,
-      "createdAt": 1728264829328
+      "createdAt": 1728547894659,
+      "id": 1
     },
     {
-      "id": "43da",
-      "title": "publish test",
-      "body": "publish true인 게시글",
+      "title": "dfasfsd",
+      "body": "dsfasdfsdgsga",
       "publish": true,
-      "createdAt": 1728265095342
+      "createdAt": 1728547965234,
+      "id": 2
     },
     {
-      "id": "177a",
-      "title": "Publish test ",
-      "body": "publish false인 게시글",
+      "title": "fdsfsa",
+      "body": "gsdfasfsdfas",
       "publish": false,
-      "createdAt": 1728265110729
+      "createdAt": 1728547969112,
+      "id": 3
     },
     {
-      "id": "d2ad",
-      "title": "go admin test",
-      "body": "gogogogo",
+      "title": "1412r12",
+      "body": "sdfasdfwwerw",
       "publish": false,
-      "createdAt": 1728282260966
+      "createdAt": 1728547972106,
+      "id": 4
+    },
+    {
+      "title": "213412sdf",
+      "body": "sdfsdfsftq",
+      "publish": true,
+      "createdAt": 1728547978087,
+      "id": 5
+    },
+    {
+      "title": "vxcv",
+      "body": "xvfwfw1234124",
+      "publish": false,
+      "createdAt": 1728547982044,
+      "id": 6
+    },
+    {
+      "title": "124214f",
+      "body": "sdfafwewfdsfsf",
+      "publish": false,
+      "createdAt": 1728547986422,
+      "id": 7
+    },
+    {
+      "title": "vcxvwwf",
+      "body": "dvcsvasfa",
+      "publish": false,
+      "createdAt": 1728547990221,
+      "id": 8
     }
   ]
 }
