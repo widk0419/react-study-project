@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { bool } from "prop-types";
-import PagiNation from "./Pagination";
+import Pagination from "./Pagination";
 
 const BlogList = ({isAdmin = false}) => {
 
     const history = useHistory();
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const pageParam = params.get('page');
     const [posts, setPosts] = useState([]) ;
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,8 +23,11 @@ const BlogList = ({isAdmin = false}) => {
         setNumberOfPages(Math.ceil(numberOfPosts/limit));
     }, [numberOfPosts]);
 
+    const onClickPageButton = (page) => {
+        history.push(`${location.pathname}?page=${page}`);
+    }
+
     const getPosts = (page = 1) => {
-        setCurrentPage(page);
         let params = {
             _page: page,
             _limit: limit,
@@ -36,12 +42,16 @@ const BlogList = ({isAdmin = false}) => {
         axios.get(`http://localhost:3001/posts`,{ 
             params: params
         }).then((res) => {
-            console.log(res.data.length);
+            console.log('post갯수:',res.data.length);
             setNumberOfPosts(res.headers['x-total-count']);
             setPosts(res.data);
             setLoading(false);
         })
     }
+    useEffect(() => {
+        setCurrentPage(parseInt(pageParam) || 1);
+        getPosts(parseInt(pageParam) || 1);
+    }, [pageParam]);
 
     const deleteBlog = (e, id) => {
         e.stopPropagation();        
@@ -50,10 +60,6 @@ const BlogList = ({isAdmin = false}) => {
         });
     };
 
-    useEffect(() => {
-        getPosts();
-    }, []);
- 
 
     if(loading){
         return (
@@ -94,10 +100,10 @@ const BlogList = ({isAdmin = false}) => {
     return (
         <div>
             {renderBlogList()}
-            <PagiNation 
+            <Pagination 
                 currentPage={currentPage} 
                 numberOfPages={numberOfPages}
-                onClick={getPosts}
+                onClick={onClickPageButton}
                 limit
             />
         </div>
